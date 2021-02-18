@@ -1,0 +1,51 @@
+Point 1. Your main python file name should be application.py
+Point 2. Your flask object name, which we have defined in application.py should also be the application.
+Point 3. .ebignore  is responsible to hold the name of those files which we don't want to push on a cloud.
+Point 4. Create a requirements.txt file.
+        Command : pip freeze > requirements.txt
+Point 5. Create a folder called .ebextensions
+Point 6. Inside .ebextensions we need a python.config file.
+Point 7. Mention the commands in python.config
+            option_settings:
+              "aws:elasticbeanstalk:container:python":
+                WSGIPath: application:application
+
+
+GCP cloud deployment
+
+1. go to GCP cloud create a new project
+2. create new configuration file named as app.yaml put below content inside the newly created file
+            runtime: python
+            env: flex
+            entrypoint: gunicorn -b :$PORT main:application
+
+            runtime_config:
+              python_version: 3
+
+            manual_scaling:
+              instances: 1
+            resources:
+              cpu: 1
+              memory_gb: 0.5
+              disk_size_gb: 10
+
+3. Initialise a local git
+        git init
+        git add .
+        git commit -m "any message for commit"
+
+4. Go to your github.com create a new repo provide a any name for that
+5. Push your code to github repo
+    git push github_repo_url branch_name
+6. go to your GCP cloud
+7. click on 'activate cloud shell' which is on  the top right corner of your GCP browser view
+8. once the cloud shell is activated, go to your cloud shell and clone your github app which we have pushed at step 5 git clone repo_url
+9. on the cloud itself get into/navigate to project folder
+    cd project_folder_name
+10. After that we are supposed to connect our cloned app to project which we have created in step 1
+    gcloud config set project project_id
+11. execute the below command in gcloud shell
+    gcloud app deploy
+
+
+
