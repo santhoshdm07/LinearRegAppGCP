@@ -3,12 +3,14 @@ Point 2. Your flask object name, which we have defined in application.py should 
 Point 3. .ebignore  is responsible to hold the name of those files which we don't want to push on a cloud.
 Point 4. Create a requirements.txt file.
         Command : pip freeze > requirements.txt
-Point 5. Create a folder called .ebextensions
+Point 5. Create a folder called .ebextensions #elasticbean extension
 Point 6. Inside .ebextensions we need a python.config file.
 Point 7. Mention the commands in python.config
             option_settings:
               "aws:elasticbeanstalk:container:python":
                 WSGIPath: application:application
+
+Point 8. zip the required files, should not be any folder where all the files were inside this folder, it should be open files
 
 
 GCP cloud deployment
